@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        #container {
+            height: 100%;
+            width: 100%;
+        }
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            right: 30px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #FF0000;
+        }
+        @keyframes cursorBlink {
+            0% {
+                border-color: #FF0000;
+            }
+            50% {
+                border-color: transparent;
+            }
+            100% {
+                border-color: #FF0000;
+            }
+        }
+        /* Add smooth transitions for cursor and text changes */
+        .monaco-editor {
+            transition: all 0.15s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+
+    <div class="footer">
+        Cracked by github.com/WalmartSolutions
+    </div>
+
+    <script src="./vs/loader.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var editor;
+
+        require(["./vs/editor/editor.main"], function () {
+            monaco.editor.defineTheme('christmasBlackTheme', {
+                base: 'vs-dark',
+                inherit: true,
+                rules: [],
+                colors: {
+                    'editor.background': '#141414',
+                    'editor.foreground': '#FFFFFF',
+                    'editor.lineHighlightBackground': '#2F4F4F',
+                    'editorCursor.foreground': '#FF0000',
+                    'editor.selectionBackground': '#228B22',
+                    'editor.selectionHighlightBackground': '#00FA9A',
+                    'editorWhitespace.foreground': '#BEBEBE'
+                }
+            });
+
+            editor = monaco.editor.create(document.getElementById("container"), {
+                value: '',
+                language: "lua",
+                theme: "christmasBlackTheme",
+                dragAndDrop: true,
+                links: false,
+                minimap: {
+                    enabled: false,
+                },
+                smoothScrolling: true,
+                showFoldingControls: "always",
+                fontFamily: 'Consolas, "Courier New", monospace',
+                fontSize: 16, /* Slightly increased font size for better readability */
+                wordWrap: "on",
+                autoIndent: "full",
+                tabSize: 4,
+                cursorStyle: "line",
+                cursorWidth: 3, /* Thicker cursor for a more visible effect */
+                scrollBeyondLastLine: false,
+                smoothScroll: {
+                    enabled: true
+                },
+                type: 'text',
+                automaticLayout: true, /* Ensure editor adjusts with window size for smooth layout */
+            });
+
+            // Add smooth animations for typing effects
+            editor.getDomNode().style.animation = 'cursorBlink 1s step-end infinite';
+        });
+
+        function getValue() {
+            return editor.getValue();
+        }
+
+        function setValue(value) {
+            editor.setValue(value);
+        }
+    </script>
+</body>
+</html>
